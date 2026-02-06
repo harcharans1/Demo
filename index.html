@@ -1,145 +1,477 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resso Clone - Music Streaming</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gurbani Radio Home - Dark Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b4bee",
+                        "gold": "#D4AF37",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                        "card-dark": "#1c1d27",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Work Sans", sans-serif;
+        }
+        .visualizer-bar {
+            animation: bounce 1.2s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { height: 4px; }
+            50% { height: 24px; }
+        }
+    </style>
 </head>
-<body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">
-            <i class="fas fa-music"></i>
-            <h1>Resso</h1>
-        </div>
-        <nav>
-            <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
-            <a href="#"><i class="fas fa-search"></i> Search</a>
-            <a href="#"><i class="fas fa-bookmark"></i> Library</a>
-            <a href="#"><i class="fas fa-heart"></i> Liked Songs</a>
-            <a href="#"><i class="fas fa-clock"></i> Recent</a>
-            <a href="#"><i class="fas fa-plus"></i> Create Playlist</a>
-        </nav>
-        
-        <div class="playlists">
-            <h3>PLAYLISTS</h3>
-            <div id="playlists-container"></div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Header -->
-        <header>
-            <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" id="search-input" placeholder="Search songs, artists, albums...">
-            </div>
-            <div class="user-profile">
-                <img src="https://ui-avatars.com/api/?name=User&background=ff5722&color=fff" alt="User">
-            </div>
-        </header>
-
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Welcome back, User!</h2>
-                <p>Continue listening to your favorite music</p>
-            </div>
-        </section>
-
-        <!-- Recently Played -->
-        <section class="section">
-            <h2>Recently Played</h2>
-            <div class="songs-grid" id="recent-songs"></div>
-        </section>
-
-        <!-- Trending Now -->
-        <section class="section">
-            <div class="section-header">
-                <h2>Trending Now</h2>
-                <a href="#" class="see-all">See all</a>
-            </div>
-            <div class="songs-grid" id="trending-songs"></div>
-        </section>
-
-        <!-- Playlists -->
-        <section class="section">
-            <div class="section-header">
-                <h2>Your Playlists</h2>
-                <a href="#" class="see-all">See all</a>
-            </div>
-            <div class="playlists-grid" id="featured-playlists"></div>
-        </section>
-
-        <!-- For You -->
-        <section class="section">
-            <h2>Made For You</h2>
-            <div class="recommendations">
-                <div class="recommendation-card">
-                    <div class="card-image" style="background: linear-gradient(45deg, #ff6b6b, #ffa8a8);">
-                        <i class="fas fa-heart"></i>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen overflow-x-hidden">
+<div class="flex flex-col min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/80 backdrop-blur-md px-6 lg:px-20 py-3">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between gap-8">
+<!-- Logo -->
+<div class="flex items-center gap-3">
+<div class="size-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">radio</span>
+</div>
+<h2 class="text-xl font-black tracking-tight text-white hidden md:block">GURBANI<span class="text-gold">RADIO</span></h2>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-sm font-semibold text-white hover:text-gold transition-colors" href="#">Home</a>
+<a class="text-sm font-medium text-slate-400 hover:text-white transition-colors" href="#">Live Radio</a>
+<a class="text-sm font-medium text-slate-400 hover:text-white transition-colors" href="#">Recordings</a>
+<a class="text-sm font-medium text-slate-400 hover:text-white transition-colors" href="#">Nitnem</a>
+</nav>
+<!-- Search and User -->
+<div class="flex flex-1 justify-end items-center gap-4">
+<div class="relative w-full max-w-xs hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="w-full bg-[#282b39] border-none rounded-lg py-2 pl-10 pr-4 text-sm text-white focus:ring-2 focus:ring-primary placeholder:text-slate-500" placeholder="Search Shabads, Raagis..." type="text"/>
+</div>
+<button class="p-2 hover:bg-white/10 rounded-full transition-colors">
+<span class="material-symbols-outlined text-white">notifications</span>
+</button>
+<div class="size-10 rounded-full bg-cover bg-center border-2 border-primary/30" data-alt="User profile avatar portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC3Je2OjX5HmzXGH2Yrn2Enqq3g3W_ANqzaaJxQuSSwMQSmTlxER2DgD24GjW50H6pA_zNtnwYyh9K22AcKYfmJ8IAXTUkWDypaN3B_os6rnJkBL8lGvjvAIoWCnOorBO4b0GqryICrXtUEHUv1KkQkIQ5njINKNvrohcoHF6GORaeJaTM2hwbzEnQdU9oFEBh7qo-eakYNtluPnQrk6in1XVDHHK1PTGhyTqTSAM6eth5H5yuyzuprLNbXKBXych7ITnA1go4l5NI9")'></div>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<!-- Hero Section -->
+<section class="relative h-[550px] w-full flex items-center justify-center px-6 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/40 to-transparent z-10"></div>
+<img class="w-full h-full object-cover" data-alt="Golden Temple at night with reflection in water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeT-Gyx8N4FbaqG_pFeJHtKB029J94XS1K5u8lmfxLeXVUNAh61L8Q-tgFWo0ot6TYwR9NI0DtSTxIGXjgGNWxfg9_sY2teXPa8ehy9bBVtdmgAHXxsDoednLMvynRZPwQ3THyAZJAXf2rTdlWDLZIyu9KUKEn9eAHnc5L473a96nuMz4KnX_UCo8O3kdpB67zjNm5y_kFcSf1gRCEpabMuVHctEMcfSQT7trOHD_Ja-EC5P5AVKw860Uc99ug5pPcXtLjwYt7wyst"/>
+</div>
+<div class="relative z-20 text-center max-w-3xl space-y-6">
+<div class="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 px-4 py-1.5 rounded-full text-primary text-xs font-bold uppercase tracking-widest">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                        Live Now: Sri Harmandir Sahib
                     </div>
-                    <h4>Liked Songs</h4>
-                    <p>Your favorite tracks</p>
-                </div>
-                <div class="recommendation-card">
-                    <div class="card-image" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h4>Daily Mix 1</h4>
-                    <p>Based on your listening</p>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Music Player -->
-    <div class="music-player">
-        <div class="player-left">
-            <div class="now-playing">
-                <img id="now-playing-cover" src="https://upload.wikimedia.org/wikipedia/en/c/c1/The_Weeknd_-_Blinding_Lights.png" alt="Album Cover">
-                <div class="song-info">
-                    <h4 id="now-playing-title">Blinding Lights</h4>
-                    <p id="now-playing-artist">The Weeknd</p>
-                </div>
-                <button class="like-btn"><i class="far fa-heart"></i></button>
-            </div>
-        </div>
-        
-        <div class="player-center">
-            <div class="player-controls">
-                <button class="control-btn"><i class="fas fa-random"></i></button>
-                <button class="control-btn"><i class="fas fa-step-backward"></i></button>
-                <button class="play-btn" id="play-btn">
-                    <i class="fas fa-play"></i>
-                </button>
-                <button class="control-btn"><i class="fas fa-step-forward"></i></button>
-                <button class="control-btn"><i class="fas fa-redo"></i></button>
-            </div>
-            <div class="progress-bar">
-                <span class="time" id="current-time">0:00</span>
-                <div class="progress-container">
-                    <div class="progress" id="progress"></div>
-                </div>
-                <span class="time" id="duration">3:20</span>
-            </div>
-        </div>
-        
-        <div class="player-right">
-            <div class="volume-control">
-                <i class="fas fa-volume-up"></i>
-                <input type="range" id="volume-slider" min="0" max="100" value="80">
-            </div>
-            <button class="queue-btn"><i class="fas fa-list"></i></button>
-        </div>
-        
-        <audio id="audio-player" src="/uploads/songs/song1.mp3"></audio>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+<h1 class="text-4xl md:text-6xl font-black text-white leading-tight tracking-tighter">
+                        Experience Divine <span class="text-gold">Harmony</span>
+</h1>
+<p class="text-lg text-slate-300 max-w-xl mx-auto font-light leading-relaxed">
+                        Immerse yourself in 24/7 live Gurbani broadcasts, Nitnem prayers, and soul-stirring recordings from worldwide Takhats.
+                    </p>
+<div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+<button class="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-blue-600 transition-all shadow-lg shadow-primary/20 flex items-center gap-2">
+<span class="material-symbols-outlined">play_arrow</span>
+                            Listen Live
+                        </button>
+<button class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-md transition-all border border-white/10">
+                            View Schedule
+                        </button>
+</div>
+</div>
+</section>
+<!-- Content Area -->
+<div class="max-w-[1440px] mx-auto px-6 lg:px-20 -mt-20 relative z-30 pb-20">
+<!-- Now Playing Card -->
+<div class="bg-card-dark border border-white/5 rounded-2xl p-6 shadow-2xl flex flex-col md:flex-row items-center gap-8 mb-16">
+<div class="relative group">
+<div class="size-32 rounded-xl overflow-hidden shadow-lg border-2 border-gold/20">
+<img class="w-full h-full object-cover" data-alt="Portrait of a spiritual singer with harmonium" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwTXsmROAJcs_CqeQZXVze_1eNk2j5HKLd1POJ9BmTqcI4DxGxIDebbPsRh_-cIatEMEHvVKfh0iwHDE3uvdhs-znKsMYrbAOJhi6_S_KExv93Xlcv3c8qMjqpHwOIn0zOir0uecmKNeA2mGJ-S7QRZlgMzNm4LtOul8jFnJFnoSlICUhq6jclxTBCdlYBuADWtsE30xgD5BozyK-B4qiH1XZQ1NpjMsz7dCldSCbVg_dHYhIMtePJzDCbSpw-D7dmHNpoM6-ttm5n"/>
+</div>
+<button class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-4xl">pause_circle</span>
+</button>
+</div>
+<div class="flex-1 space-y-1 text-center md:text-left">
+<span class="text-gold text-xs font-bold uppercase tracking-widest">Currently Playing</span>
+<h3 class="text-2xl font-bold text-white">Dhan Dhan Ramdas Gur</h3>
+<p class="text-slate-400">Bhai Niranjan Singh Ji • <span class="text-primary/80 italic">Raag Kalyan</span></p>
+<div class="flex items-center gap-3 mt-4 justify-center md:justify-start">
+<div class="flex items-end gap-1 h-6">
+<div class="w-1 bg-primary visualizer-bar" style="animation-delay: 0.1s"></div>
+<div class="w-1 bg-primary visualizer-bar" style="animation-delay: 0.3s"></div>
+<div class="w-1 bg-primary visualizer-bar" style="animation-delay: 0.2s"></div>
+<div class="w-1 bg-primary visualizer-bar" style="animation-delay: 0.5s"></div>
+<div class="w-1 bg-primary visualizer-bar" style="animation-delay: 0.4s"></div>
+<div class="w-1 bg-primary visualizer-bar" style="animation-delay: 0.1s"></div>
+</div>
+<span class="text-xs text-slate-500 font-mono uppercase tracking-tighter">Live Waveform</span>
+</div>
+</div>
+<div class="flex items-center gap-4 pr-4">
+<button class="size-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/5">
+<span class="material-symbols-outlined">skip_previous</span>
+</button>
+<button class="size-14 rounded-full bg-primary flex items-center justify-center text-white shadow-xl shadow-primary/30">
+<span class="material-symbols-outlined text-3xl">play_arrow</span>
+</button>
+<button class="size-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white/5">
+<span class="material-symbols-outlined">skip_next</span>
+</button>
+<div class="h-10 w-px bg-white/10 mx-2"></div>
+<button class="text-slate-400 hover:text-white">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+</div>
+<!-- Live Broadcasts Section -->
+<div class="mb-16">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-2xl font-bold text-white">Live from Takhats</h2>
+<p class="text-slate-400 text-sm">Direct spiritual streams from historical shrines</p>
+</div>
+<button class="text-primary font-semibold text-sm hover:underline">View All Stations</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Station 1 -->
+<div class="bg-card-dark rounded-2xl overflow-hidden border border-white/5 hover:border-primary/40 transition-all group">
+<div class="relative h-40 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Evening view of Sri Harmandir Sahib" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFg9COAmY8XBDs1ffewPpS06rCIwMfFJE0pTHYsrhzMdpzdDSN76m90V1j8_tqAErMszC3leYZRtZjkTA46Yu145AwlSa1OMIw0b4iBs3KqD90IkVsiyD3O1gFssA9bzV6ILmfY2Bq_jG6uZr7s3M3mpVVbo10AUaSvbcY7S_0X9FLqsINlEq1oEzHusE1imhMsq7pAW9R0PvA084Ku8AFUWl-_DTh18JWinF_DMFiX9trfRCpvkG-xtYxreVBwmiE0VBOWV5CnxaM"/>
+<div class="absolute top-3 left-3 bg-red-600 text-[10px] font-black text-white px-2 py-0.5 rounded uppercase flex items-center gap-1">
+<span class="block size-1.5 bg-white rounded-full animate-pulse"></span> Live
+                                </div>
+</div>
+<div class="p-4">
+<h4 class="font-bold text-white">Sri Harmandir Sahib</h4>
+<p class="text-xs text-slate-400 mt-1">Amritsar, Punjab</p>
+<div class="flex items-center justify-between mt-4">
+<span class="text-[10px] text-slate-500 font-medium">12.4K Listeners</span>
+<button class="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Station 2 -->
+<div class="bg-card-dark rounded-2xl overflow-hidden border border-white/5 hover:border-primary/40 transition-all group">
+<div class="relative h-40 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Architecture of Takhat Sri Patna Sahib" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOzQsLI9LGee5WfRqnw7JYQBGVbSXnbb8B2pmzFWMTtGFAXneXknvFV7GFkSm5vvjLpviXO3ZHif4j3TlWBHHZ26Bw9INfIVtRnbkrN64oCvWQ7uvCjSqea8AbTuFJS-M3iix0M5mQ4xBRHcyRKh4kc_TtUOFsyqoKrjpFffDZSbqEvjSLf4DxKPqlNRVxpoPF48dIGcN8KpuAaBeElazQy13whxw2KsX3hFIZjvF0GXPV_f77qjGFg6jIb76P0N8ccZsrIiuUL6gj"/>
+<div class="absolute top-3 left-3 bg-slate-800 text-[10px] font-black text-white px-2 py-0.5 rounded uppercase">Off-air</div>
+</div>
+<div class="p-4">
+<h4 class="font-bold text-white">Takhat Sri Patna Sahib</h4>
+<p class="text-xs text-slate-400 mt-1">Patna, Bihar</p>
+<div class="flex items-center justify-between mt-4">
+<span class="text-[10px] text-slate-500 font-medium">Replaying: Asa Di Var</span>
+<button class="size-8 rounded-lg bg-white/5 text-slate-400 flex items-center justify-center hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-lg">history</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Station 3 -->
+<div class="bg-card-dark rounded-2xl overflow-hidden border border-white/5 hover:border-primary/40 transition-all group">
+<div class="relative h-40 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Interior spiritual art and marble" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3xqFR7k1m9E2IHO5z5jUquZgocjIZ0n2PVe0-n3qbwzCXXfsS9QTpw4NXbqJlmAJXHEwxNgOXfJd4n0ookQfashB3lJWjZ3-ZlCBuYAegy_F1R1Kzug5NzTJH7h2taWwcjU_bWKpCEdwm_acGzl14ev-j_UwmLBaDT8gV6l2fZ7jTdJEYES7b4OsdaJT6j04fRdD4bmrbaTAUweCI8utQdrlPSDEgrGMM-MZ4RudXvwphw5i_5gDG8ILgkU8F7wuMqA0otraGSTAB"/>
+<div class="absolute top-3 left-3 bg-red-600 text-[10px] font-black text-white px-2 py-0.5 rounded uppercase flex items-center gap-1">
+<span class="block size-1.5 bg-white rounded-full animate-pulse"></span> Live
+                                </div>
+</div>
+<div class="p-4">
+<h4 class="font-bold text-white">Takhat Sri Hazur Sahib</h4>
+<p class="text-xs text-slate-400 mt-1">Nanded, Maharashtra</p>
+<div class="flex items-center justify-between mt-4">
+<span class="text-[10px] text-slate-500 font-medium">4.2K Listeners</span>
+<button class="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Station 4 -->
+<div class="bg-card-dark rounded-2xl overflow-hidden border border-white/5 hover:border-primary/40 transition-all group">
+<div class="relative h-40 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Spiritual gathering at a gurudwara" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcF6vYAZKDG1Yb0iWVguUjEfrIzpXxZv5Beg__NfDu2EecaHLxEGeovB_oOTP73qa6u31QF_RBAXp3IJqB67J7jGUu6z3ij8uddtEqckE2FSElAUGUEdNgngWO4cLD2sJT2UlTceI6KVRXwVK5Q1D61BgcOlZrp0PVN0u9EfHYkXKx7YRbCbuZyBOzwovQw-qmJFLf8qsh64_AF5ofv_CzTNTHg1SikkOjI0YGNJJXaf5JEl3Z-_Tar0Ovmq4xzWV-HHLI1jKH_js5"/>
+<div class="absolute top-3 left-3 bg-red-600 text-[10px] font-black text-white px-2 py-0.5 rounded uppercase flex items-center gap-1">
+<span class="block size-1.5 bg-white rounded-full animate-pulse"></span> Live
+                                </div>
+</div>
+<div class="p-4">
+<h4 class="font-bold text-white">Sri Bangla Sahib</h4>
+<p class="text-xs text-slate-400 mt-1">New Delhi</p>
+<div class="flex items-center justify-between mt-4">
+<span class="text-[10px] text-slate-500 font-medium">8.1K Listeners</span>
+<button class="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Popular Raagis Section -->
+<div class="mb-16">
+<h2 class="text-2xl font-bold text-white mb-8">Popular Raagis</h2>
+<div class="flex items-center gap-10 overflow-x-auto pb-6 scrollbar-hide">
+<div class="flex flex-col items-center gap-3 min-w-[120px] text-center group cursor-pointer">
+<div class="size-24 rounded-full overflow-hidden border-2 border-transparent group-hover:border-gold transition-all p-1">
+<img class="w-full h-full object-cover rounded-full" data-alt="Raagi portrait placeholder 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAQkLywDINKwlJQnEVojWR7MR3qrwK8gJ54pJy_Wm8OMy1-EYZWfHlUxvQp0LVaNsz1NcWhIYGhMIuidXgqR8zjnYvBbWRQ1KmysWD0ewfQqi9DBU-XIyxZS5tHRyU_svnYWDoeij4IC2O3fLDyFwGe4ir34PxWeWd5UYVjoJCEJuB91AhYH-FgOwW13R1Pc-MByqU3Ll0G0eRTl5MXm-kv674TRGI8T6ML9qMOgp68filCpBAPsrpHycVQKQST7xdhuGVZsErjKQA"/>
+</div>
+<p class="text-sm font-semibold text-white group-hover:text-gold">Bhai Nirmal Singh</p>
+</div>
+<div class="flex flex-col items-center gap-3 min-w-[120px] text-center group cursor-pointer">
+<div class="size-24 rounded-full overflow-hidden border-2 border-transparent group-hover:border-gold transition-all p-1">
+<img class="w-full h-full object-cover rounded-full" data-alt="Raagi portrait placeholder 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVHEI6v0aTTG9k-imt5iSjdngT4drCzi8i5o_Z6Oc_6GyX4PuPZ6n6Si-xMC6QLRHOjZKqq8ymzsBVlxRxUe7TCS9SioLT5tnk-P0nyF8fzKdB4zvPal8WlekKzBBcFQc9aESIdBNhZuNDfGvcpKBcFPoIGjRR_SHxgogCqgRbdZGC2y8etV2lk2StHavbhJ2x27MxHqIwkUOsb2wQTj84kSMSRkQhPGsTw_QeDxEKwnWAHiYuvs71CUfbdzIkVoCEOE07Itn9pfIr"/>
+</div>
+<p class="text-sm font-semibold text-white group-hover:text-gold">Bhai Lakhwinder Singh</p>
+</div>
+<div class="flex flex-col items-center gap-3 min-w-[120px] text-center group cursor-pointer">
+<div class="size-24 rounded-full overflow-hidden border-2 border-transparent group-hover:border-gold transition-all p-1">
+<img class="w-full h-full object-cover rounded-full" data-alt="Raagi portrait placeholder 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4cdCxg39pYfwUph-s6mb1zMHQAd9jjoEYDy6xxq-t3jiVUjp5Yf3HPUy2oxN0RlcZU9yuoEmNS7S6BunCnS8_sebyIQicQhRDbf0a8iQhR-y72tkN22AS8_KE4TqUQmPeuP5HhjS-40MQ3vMOe76eWpSiUwPOH1p8KcNHnLAaKoTp6AJquFyvy0r-NWxgU6KSEQvLKjC6KpONuGSkDASf60M1cpNIpmYYBOISqY9G_1bhaJQXvr3nbQGokfDt4QJRIjItCbWE97sf"/>
+</div>
+<p class="text-sm font-semibold text-white group-hover:text-gold">Bhai Satvinder Singh</p>
+</div>
+<div class="flex flex-col items-center gap-3 min-w-[120px] text-center group cursor-pointer">
+<div class="size-24 rounded-full overflow-hidden border-2 border-transparent group-hover:border-gold transition-all p-1">
+<img class="w-full h-full object-cover rounded-full" data-alt="Raagi portrait placeholder 4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFtghyfqVHTZ0qGykriKwtuZ2SClim_pCLBJ6YNb5WlLE_UQfiZRBrUreiWNUVV71epyNqnbpDnMNBWlB7K6-hrywTECKjFw24Vj-cD3y_HPXM7lQDHgseVcqYlQ1Vn6dXpSWyGV3ZvlVnT-1DMFyEUK0KdC8rz2_-VhBsVcY1yR9OBUC2ix-3EcrDJx7ANoVeI3kmtKUUlVBQZhrgXF3qud_fM2RmRSoyFaMms0-GozoxlZcRRPCoMVqrufz_MsREnWLLdBx3WmUn"/>
+</div>
+<p class="text-sm font-semibold text-white group-hover:text-gold">Bhai Harjinder Singh</p>
+</div>
+<div class="flex flex-col items-center gap-3 min-w-[120px] text-center group cursor-pointer">
+<div class="size-24 rounded-full overflow-hidden border-2 border-transparent group-hover:border-gold transition-all p-1">
+<img class="w-full h-full object-cover rounded-full" data-alt="Raagi portrait placeholder 5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZUtZ3TQMng2nB2fIox5MYKjKxWT_RD13mLhapBYdkqqhTv-1rlQ3_YhZmsdypzBPdQjCqoWLn3n2zdIiWsm1zhEc4hTupcBbkBCbN_0-PyrQjLfuA5itVNKjNPNA21zoqytgkPPGm-EUPwN2pNnxiKhBPrWvojQ-BEK4srKEc96XlCvJU1efUTyt7o8xHv9dJIU5tAkj33DVHtipSS4NYX8JCFPy2eQUESrOymhkoXQh-d14iAO7IFWqEdB1a9L1inGHH9qz9WbAu"/>
+</div>
+<p class="text-sm font-semibold text-white group-hover:text-gold">Bhai Davinder Singh</p>
+</div>
+<div class="flex flex-col items-center gap-3 min-w-[120px] text-center group cursor-pointer">
+<div class="size-24 rounded-full overflow-hidden border-2 border-transparent group-hover:border-gold transition-all p-1">
+<img class="w-full h-full object-cover rounded-full" data-alt="Raagi portrait placeholder 6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmBJ3sGSOzoBYf2ATD72yWB-sgIP9R1Ro5tVh3v4Rklju_nLw2SPVxFnn2mHkUvIUO2udaX_oZ7GMy23khlzn06CnI2_AcIiqEd8ulI0nnDLmRn8xvRMc0dgdQQpOLVzkAqCj4Ub5l1A-GpHrrUFYHKlZy79qplFMZRyvK_trbCdfAF-aU_Fih1s6gI8U-haNMnlfnRiPinHAQzryFDTjQvSQe5vOypjXeobHo4-Vo0jPChwy7lo_RWQLPmPuBeBQH0gKOhzgQ0eao"/>
+</div>
+<p class="text-sm font-semibold text-white group-hover:text-gold">Bhai Jaswant Singh</p>
+</div>
+</div>
+</div>
+<!-- Recently Played Table -->
+<div class="mb-16">
+<h2 class="text-2xl font-bold text-white mb-8">Recently Played</h2>
+<div class="bg-card-dark rounded-2xl border border-white/5 overflow-hidden">
+<table class="w-full text-left">
+<thead class="bg-white/5 border-b border-white/5">
+<tr>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-400">Shabad / Title</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-400">Raagi</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-400">Duration</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-slate-400 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-slate-800 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">music_note</span>
+</div>
+<div>
+<p class="font-bold text-white group-hover:text-primary transition-colors">Aukhi Ghadhi Na Dekhan Dei</p>
+<p class="text-xs text-slate-500">Raag Bilaval</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">Bhai Mehtab Singh Ji</td>
+<td class="px-6 py-4 text-sm text-slate-500">08:42</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-primary/20 hover:text-primary rounded-lg text-slate-500 transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="p-2 hover:bg-primary/20 hover:text-primary rounded-lg text-slate-500 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-slate-800 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">music_note</span>
+</div>
+<div>
+<p class="font-bold text-white group-hover:text-primary transition-colors">Mera Baid Guru Govinda</p>
+<p class="text-xs text-slate-500">Raag Sorath</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">Bhai Rai Singh Ji</td>
+<td class="px-6 py-4 text-sm text-slate-500">12:15</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-primary/20 hover:text-primary rounded-lg text-slate-500 transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="p-2 hover:bg-primary/20 hover:text-primary rounded-lg text-slate-500 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-slate-800 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">music_note</span>
+</div>
+<div>
+<p class="font-bold text-white group-hover:text-primary transition-colors">Tu Mero Piaro Ta Kaisi Bhookha</p>
+<p class="text-xs text-slate-500">Raag Asa</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">Bhai Onkar Singh Ji</td>
+<td class="px-6 py-4 text-sm text-slate-500">10:05</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 hover:bg-primary/20 hover:text-primary rounded-lg text-slate-500 transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+<button class="p-2 hover:bg-primary/20 hover:text-primary rounded-lg text-slate-500 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<!-- Player Bar (Mobile/Bottom) -->
+<footer class="fixed bottom-0 left-0 right-0 bg-background-dark/95 border-t border-white/5 backdrop-blur-xl px-6 py-4 z-50 flex items-center justify-between shadow-2xl">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Mini album art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgcZ3LVedO8JX8jwC9mE2eG49bm_Dzg5gAMi3f36NbpkZPOKU1vGCCxZsv6FPEtkiV2osV9Xh-LYPHcRwHDWPwQ99xRjTw-0PMjU58vZFeIbnNiJzXqyUuyMvg48VT2fot5YeVCpjJfMVpIFHYx7kMkSP34MpjUgH9BM9kI3ySKeNfcnSGzk1Sz7E0fgmQomF5KbHeP9t2_AL9yn0J01q0T8t3bU3P8KUwwk6lyKX4RxYCZm8c1zHEQJTQltU4QU5t1M_WznXVfcof"/>
+</div>
+<div>
+<h5 class="text-sm font-bold text-white">Dhan Dhan Ramdas Gur</h5>
+<p class="text-xs text-slate-400">Bhai Niranjan Singh Ji</p>
+</div>
+</div>
+<div class="hidden md:flex flex-col items-center gap-1 flex-1 max-w-xl mx-8">
+<div class="flex items-center gap-6">
+<button class="text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined">shuffle</span></button>
+<button class="text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined">skip_previous</span></button>
+<button class="size-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 transition-transform"><span class="material-symbols-outlined">pause</span></button>
+<button class="text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined">skip_next</span></button>
+<button class="text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined">repeat</span></button>
+</div>
+<div class="w-full flex items-center gap-3">
+<span class="text-[10px] text-slate-500 font-mono">03:45</span>
+<div class="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%] rounded-full relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 size-3 bg-white rounded-full shadow-lg"></div>
+</div>
+</div>
+<span class="text-[10px] text-slate-500 font-mono">10:20</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-lg">volume_up</span>
+<div class="w-24 h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-white/60 w-[80%] rounded-full"></div>
+</div>
+</div>
+<button class="p-2 text-slate-400 hover:text-white"><span class="material-symbols-outlined">playlist_play</span></button>
+<button class="p-2 text-slate-400 hover:text-white"><span class="material-symbols-outlined">cast</span></button>
+</div>
+</footer>
+<!-- Site Footer Information -->
+<div class="bg-black/50 py-16 px-6 lg:px-20 border-t border-white/5 pb-32">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-3 mb-6">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">radio</span>
+</div>
+<h2 class="text-lg font-black tracking-tight text-white uppercase">Gurbani<span class="text-gold">Radio</span></h2>
+</div>
+<p class="text-slate-400 text-sm leading-relaxed">
+                        Bringing spiritual tranquility and divine connection to Sikhs worldwide through high-quality audio broadcasts and recordings.
+                    </p>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Resources</h4>
+<ul class="space-y-3 text-sm text-slate-400">
+<li><a class="hover:text-gold transition-colors" href="#">Live Radio Guide</a></li>
+<li><a class="hover:text-gold transition-colors" href="#">Nitnem Gutka</a></li>
+<li><a class="hover:text-gold transition-colors" href="#">Raag Information</a></li>
+<li><a class="hover:text-gold transition-colors" href="#">History of Shabads</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Community</h4>
+<ul class="space-y-3 text-sm text-slate-400">
+<li><a class="hover:text-gold transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-gold transition-colors" href="#">Seva &amp; Support</a></li>
+<li><a class="hover:text-gold transition-colors" href="#">Request a Shabad</a></li>
+<li><a class="hover:text-gold transition-colors" href="#">Contact Support</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-bold mb-6">Mobile Apps</h4>
+<p class="text-slate-400 text-sm mb-4">Listen on the go with our dedicated apps.</p>
+<div class="flex flex-col gap-3">
+<button class="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-4 py-2 text-left transition-all">
+<span class="material-symbols-outlined text-2xl">ios</span>
+<div>
+<p class="text-[10px] text-slate-500 font-bold uppercase">Download on the</p>
+<p class="text-sm font-bold text-white">App Store</p>
+</div>
+</button>
+<button class="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-4 py-2 text-left transition-all">
+<span class="material-symbols-outlined text-2xl">play_store_installed</span>
+<div>
+<p class="text-[10px] text-slate-500 font-bold uppercase">Get it on</p>
+<p class="text-sm font-bold text-white">Google Play</p>
+</div>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+<p>© 2024 Gurbani Radio Foundation. All spiritual content remains the property of original creators.</p>
+<div class="flex items-center gap-6">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-white transition-colors" href="#">Cookie Settings</a>
+</div>
+</div>
+</div>
+</div>
+</body></html>
