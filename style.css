@@ -6,72 +6,87 @@
 }
 
 body {
-  background: #111;
+  background: #121212;
   color: white;
-  padding-bottom: 70px;
+  padding-bottom: 140px;
 }
 
 /* HEADER */
 header {
   display: flex;
   justify-content: space-between;
-  padding: 15px 20px;
-  background: #1e1e1e;
-  position: sticky;
-  top: 0;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: bold;
+  padding: 15px;
+  background: #181818;
 }
 
 .upload-btn {
-  background: #ff3b5c;
+  background: #1db954;
   border: none;
-  padding: 10px 15px;
-  color: white;
+  padding: 10px 14px;
   border-radius: 8px;
+  color: white;
   cursor: pointer;
 }
 
 /* MAIN */
 main {
-  display: flex;
-  gap: 20px;
   padding: 20px;
-  flex-wrap: wrap;
-}
-
-section {
-  flex: 1;
-  min-width: 280px;
-}
-
-h2 {
-  margin-bottom: 10px;
 }
 
 .card {
   background: #222;
+  margin: 10px 0;
   padding: 15px;
-  margin-bottom: 10px;
   border-radius: 10px;
-  cursor: pointer;
 }
 
-/* FOOTER */
+/* FOOTER NAV */
 footer {
   position: fixed;
-  bottom: 0;
+  bottom: 70px;
   width: 100%;
-  background: #1e1e1e;
+  background: #181818;
   display: flex;
   justify-content: space-around;
-  padding: 12px 0;
+  padding: 10px 0;
 }
 
 footer a {
   color: white;
   text-decoration: none;
+}
+
+/* PLAYER */
+.player {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+}
+
+.player img {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+}
+
+.player-info {
+  flex: 1;
+}
+
+#progress {
+  width: 100%;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  margin: 0 5px;
+  cursor: pointer;
 }
