@@ -1,82 +1,113 @@
-const uploadBtn = document.querySelector(".upload-btn");
+const uploadBtn = document.getElementById("uploadBtn");
 const songInput = document.getElementById("songInput");
+const songList = document.getElementById("songList");
+
 const audio = document.getElementById("audio");
-
 const playBtn = document.getElementById("play");
-const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
-
+const prevBtn = document.getElementById("prev");
+const shuffleBtn = document.getElementById("shuffle");
+const repeatBtn = document.getElementById("repeat");
 const progress = document.getElementById("progress");
-const songName = document.getElementById("songName");
+const songTitle = document.getElementById("songTitle");
 
 let songs = JSON.parse(localStorage.getItem("songs")) || [];
 let currentIndex = 0;
+let repeat = false;
 
-// Upload Song
-uploadBtn.addEventListener("click", () => {
-  songInput.click();
-});
+/* UPLOAD */
+uploadBtn.onclick = () => songInput.click();
 
-songInput.addEventListener("change", (e) => {
+songInput.addEventListener("change", e=>{
   const file = e.target.files[0];
+  if(!file) return;
 
-  if (file) {
-    const url = URL.createObjectURL(file);
+  const url = URL.createObjectURL(file);
 
-    songs.push({
-      name: file.name,
-      url: url
-    });
+  songs.push({
+    name:file.name,
+    url:url
+  });
 
-    localStorage.setItem("songs", JSON.stringify(songs));
-    alert("Song added ✅");
-  }
+  localStorage.setItem("songs", JSON.stringify(songs));
+  renderSongs();
 });
 
-// Load song
-function loadSong(index) {
-  if (songs.length === 0) return;
+/* SHOW SONGS */
+function renderSongs(){
+  songList.innerHTML = "";
 
-  audio.src = songs[index].url;
-  songName.textContent = songs[index].name;
+  songs.forEach((song,index)=>{
+    const div = document.createElement("div");
+    div.className="song-card";
+    div.innerText="🎵 " + song.name;
+
+    div.onclick=()=>{
+      currentIndex=index;
+      loadSong();
+      audio.play();
+      playBtn.innerText="⏸";
+    };
+
+    songList.appendChild(div);
+  });
 }
 
-// Play / Pause
-playBtn.addEventListener("click", () => {
-  if (audio.paused) {
+/* LOAD SONG */
+function loadSong(){
+  if(!songs.length) return;
+  audio.src = songs[currentIndex].url;
+  songTitle.innerText = songs[currentIndex].name;
+}
+
+/* PLAY / PAUSE */
+playBtn.onclick=()=>{
+  if(audio.paused){
     audio.play();
-    playBtn.textContent = "⏸";
-  } else {
+    playBtn.innerText="⏸";
+  }else{
     audio.pause();
-    playBtn.textContent = "▶️";
+    playBtn.innerText="▶️";
   }
-});
+};
 
-// Next
-nextBtn.addEventListener("click", () => {
-  currentIndex = (currentIndex + 1) % songs.length;
-  loadSong(currentIndex);
+/* NEXT / PREV */
+nextBtn.onclick=()=>{
+  currentIndex = (currentIndex+1)%songs.length;
+  loadSong();
   audio.play();
-});
+};
 
-// Prev
-prevBtn.addEventListener("click", () => {
-  currentIndex = (currentIndex - 1 + songs.length) % songs.length;
-  loadSong(currentIndex);
+prevBtn.onclick=()=>{
+  currentIndex = (currentIndex-1+songs.length)%songs.length;
+  loadSong();
   audio.play();
-});
+};
 
-// Progress Bar update
-audio.addEventListener("timeupdate", () => {
-  progress.value = (audio.currentTime / audio.duration) * 100 || 0;
-});
+/* SHUFFLE */
+shuffleBtn.onclick=()=>{
+  currentIndex = Math.floor(Math.random()*songs.length);
+  loadSong();
+  audio.play();
+};
 
-// Seek
-progress.addEventListener("input", () => {
-  audio.currentTime = (progress.value / 100) * audio.duration;
-});
+/* REPEAT */
+repeatBtn.onclick=()=>{
+  repeat=!repeat;
+  repeatBtn.style.opacity = repeat ? "1" : "0.5";
+};
 
-// Auto next
-audio.addEventListener("ended", () => {
-  nextBtn.click();
-});
+audio.onended=()=>{
+  repeat ? audio.play() : nextBtn.click();
+};
+
+/* PROGRESS */
+audio.ontimeupdate=()=>{
+  progress.value = (audio.currentTime/audio.duration)*100 || 0;
+};
+
+progress.oninput=()=>{
+  audio.currentTime = (progress.value/100)*audio.duration;
+};
+
+renderSongs();
