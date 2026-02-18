@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
+}
+
+body {
+  background: #111;
+  color: white;
+  padding-bottom: 70px;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: #1e1e1e;
+  position: sticky;
+  top: 0;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.upload-btn {
+  background: #ff3b5c;
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* MAIN */
+main {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+section {
+  flex: 1;
+  min-width: 280px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.card {
+  background: #222;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #1e1e1e;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
