@@ -6,67 +6,68 @@
 }
 
 body{
-  background:#121212;
+  background:linear-gradient(135deg,#0f0f0f,#1a1a1a);
   color:white;
   overflow:hidden;
 }
 
 /* LAYOUT */
-.container{
+.layout{
   display:flex;
   height:calc(100vh - 90px);
 }
 
-/* SIDEBAR */
-.sidebar{
-  width:220px;
-  background:#000;
+/* MENU */
+.menu{
+  width:230px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
   padding:20px;
+  border-right:1px solid #333;
 }
 
-.sidebar h2{
-  margin-bottom:20px;
-}
-
-.sidebar p{
+.menu nav p{
   margin:12px 0;
-  color:#b3b3b3;
+  color:#ddd;
   cursor:pointer;
 }
 
 #uploadBtn{
   margin-top:20px;
-  background:#1db954;
-  border:none;
-  color:white;
-  padding:10px;
   width:100%;
-  border-radius:6px;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#ff4d6d;
+  color:white;
   cursor:pointer;
 }
 
-/* MAIN */
-.main{
+/* MAIN CONTENT */
+.content{
   flex:1;
   padding:20px;
   overflow-y:auto;
 }
 
-#songList{
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:15px;
   margin-top:20px;
 }
 
 .song-card{
-  background:#1e1e1e;
-  padding:14px;
-  margin-bottom:10px;
-  border-radius:8px;
+  background:rgba(255,255,255,0.07);
+  padding:15px;
+  border-radius:12px;
   cursor:pointer;
   transition:0.2s;
 }
 
 .song-card:hover{
-  background:#282828;
+  transform:translateY(-3px);
+  background:rgba(255,255,255,0.12);
 }
 
 /* PLAYER */
@@ -75,27 +76,28 @@ body{
   bottom:0;
   width:100%;
   height:90px;
-  background:#000;
+  background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(15px);
   display:flex;
   align-items:center;
-  padding:10px 20px;
-  border-top:1px solid #222;
+  justify-content:space-between;
+  padding:0 20px;
 }
 
-.player-left{
+.left{
   display:flex;
   align-items:center;
-  width:30%;
   gap:10px;
+  width:30%;
 }
 
-.player-left img{
-  width:60px;
-  height:60px;
-  border-radius:6px;
+.left img{
+  width:55px;
+  height:55px;
+  border-radius:8px;
 }
 
-.player-center{
+.center{
   width:40%;
   text-align:center;
 }
@@ -104,32 +106,19 @@ body{
   background:none;
   border:none;
   color:white;
-  font-size:20px;
+  font-size:22px;
   margin:0 6px;
   cursor:pointer;
 }
 
 #progress{
   width:100%;
-  margin-top:6px;
+  margin-top:5px;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-  .sidebar{
-    display:none;
-  }
-
-  .main{
-    padding:15px;
-  }
-
-  .player{
-    flex-direction:column;
-    height:120px;
-  }
-
-  .player-left,.player-center{
-    width:100%;
-  }
+  .menu{display:none;}
+  .center{width:60%;}
+  .left{width:40%;}
 }
