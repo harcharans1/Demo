@@ -8,41 +8,49 @@
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
+<header>
   <div class="logo">🎵 MyMusic</div>
   <button class="upload-btn">Upload Song</button>
   <input type="file" id="songInput" accept="audio/*" hidden>
 </header>
 
-  <!-- MAIN SECTION -->
-  <main>
+<main>
+  <section>
+    <h2>Trending Music</h2>
+    <div class="card">Top Charts</div>
+    <div class="card">New Releases</div>
+  </section>
 
-    <!-- MUSIC SECTION -->
-    <section class="music-section">
-      <h2>Trending Music</h2>
-      <div class="card">Top Charts</div>
-      <div class="card">New Releases</div>
-      <div class="card">Punjabi Hits</div>
-    </section>
+  <section>
+    <h2>Radio Stations</h2>
+    <div class="card">Harmander Sahib Radio</div>
+    <div class="card">Patna Sahib Radio</div>
+  </section>
+</main>
 
-    <!-- RADIO SECTION -->
-    <section class="radio-section">
-      <h2>Radio Stations</h2>
-      <div class="card">Harmander Sahib Radio</div>
-      <div class="card">Patna Sahib Radio</div>
-      <div class="card">Live Gurbani</div>
-    </section>
+<!-- BOTTOM PLAYER -->
+<div class="player">
+  <img id="thumb" src="https://via.placeholder.com/50" />
+  
+  <div class="player-info">
+    <div id="songName">No song selected</div>
+    <input type="range" id="progress" value="0">
+  </div>
 
-  </main>
+  <div class="controls">
+    <button id="prev">⏮</button>
+    <button id="play">▶️</button>
+    <button id="next">⏭</button>
+  </div>
+</div>
 
-  <!-- FOOTER NAV -->
-  <footer>
-    <a href="index.html">Home</a>
-    <a href="search.html">Search</a>
-    <a href="library.html">Library</a>
-  </footer>
+<footer>
+  <a href="index.html">Home</a>
+  <a href="search.html">Search</a>
+  <a href="library.html">Library</a>
+</footer>
 
-  <script src="script.js"></script>
+<audio id="audio"></audio>
+<script src="script.js"></script>
 </body>
 </html>
