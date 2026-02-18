@@ -15,6 +15,23 @@
     <a href="search.html">Search</a>
     <a href="library.html">Library</a>
   </footer>
+  
+  <script>
+  const songList = document.getElementById("songList");
+
+  let songs = JSON.parse(localStorage.getItem("songs")) || [];
+
+  if (songs.length === 0) {
+    songList.innerHTML = "<p>No songs uploaded yet.</p>";
+  } else {
+    songs.forEach(song => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.textContent = song.name;
+      songList.appendChild(div);
+    });
+  }
+</script>
 
 </body>
 </html>
