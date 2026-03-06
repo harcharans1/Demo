@@ -3,62 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MyMusic Web</title>
+  <title>Nanak Love</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-<div class="layout">
-
-  <!-- LEFT MENU -->
-  <aside class="menu">
-    <h2>🎵 MyMusic</h2>
-    <nav>
-      <p>🏠 Home</p>
-      <p>🔍 Search</p>
-      <p>📁 Library</p>
-    </nav>
-
-    <button id="uploadBtn">+ Upload Song</button>
-    <input type="file" id="songInput" accept="audio/*" hidden>
-  </aside>
-
-  <!-- MAIN CONTENT -->
-  <main class="content">
-    <h1>Recommended Songs</h1>
-
-    <div id="songList" class="grid"></div>
-  </main>
-
-</div>
-
-<!-- BOTTOM PLAYER -->
-<div class="player">
-
-  <div class="left">
-    <img id="thumb" src="https://via.placeholder.com/60">
-    <div>
-      <p id="songTitle">No song selected</p>
-    </div>
-  </div>
-
-  <div class="center">
-    <div class="controls">
-      <button id="prev">⏮</button>
-      <button id="play">▶️</button>
-      <button id="next">⏭</button>
-    </div>
-    <input type="range" id="progress" value="0">
-  </div>
-
-  <div class="right">
-    🔊
-  </div>
-
-</div>
-
-<audio id="audio"></audio>
-
-<script src="script.js"></script>
-</body>
+ <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
